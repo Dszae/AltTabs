@@ -16,8 +16,8 @@ Summon instantly with **`Alt + Q`** or **`Alt + ` `**, search in real time, and 
 <br/>
 
 <p align="center">
-  <img src="brag-output/brag.jpg" alt="AltTabs Interface Preview" width="880" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);"/><br/>
-  <sub>🎬 <b><a href="brag-output/brag.mp4">Watch 1080p Video Demonstration (brag.mp4)</a></b> • 🎮 <b><a href="demo.html">Interactive Browser Demo (demo.html)</a></b></sub>
+  <img src="assets/preview.jpg" alt="AltTabs Interface Preview" width="880" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);"/><br/>
+  <sub>🎬 <b><a href="assets/demo.mp4">Watch 1080p Video Demonstration (assets/demo.mp4)</a></b> • 🎮 <b><a href="demo.html">Interactive Browser Demo (demo.html)</a></b></sub>
 </p>
 
 <br/>

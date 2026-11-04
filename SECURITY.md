@@ -21,3 +21,4 @@ AltTabs operates under strict security and privacy principles:
 - **Zero Network Access**: The mod does not request or link any networking libraries (`ws2_32`, `wininet`, `winhttp`).
 - **No Page DOM Inspection**: Operates exclusively via Windows UI Automation on top-level window frames.
 - **Isolated Process Execution**: Operates inside a dedicated Windhawk tool process, preventing cross-process injection vulnerabilities.
+
