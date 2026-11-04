@@ -1,6 +1,10 @@
 #pragma once
 #include <windows.h>
 
+#ifndef WINBOOL
+typedef BOOL WINBOOL;
+#endif
+
 #ifndef WH_MOD_ID
 #define WH_MOD_ID L"chromium-alttab-tabs"
 #endif
