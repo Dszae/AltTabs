@@ -4,7 +4,8 @@
 // @description     Injects Chromium browser tabs (Chrome, Brave, Edge) into Windows Alt-Tab switcher, smartly grouped by root domain.
 // @version         1.0.0
 // @author          Dszae
-// @github          https://github.com/Dszae/AltTabs
+// @github          https://github.com/Dszae
+// @homepage        https://github.com/Dszae/AltTabs
 // @include         explorer.exe
 // @compilerOptions -luiautomation -ldwmapi -lshlwapi -lole32 -loleaut32 -std=c++20
 // ==/WindhawkMod==
