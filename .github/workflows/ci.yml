@@ -20,6 +20,6 @@ jobs:
     - name: Compile Standalone Windhawk Mod Source
       shell: pwsh
       run: |
-        cl /EHsc /std:c++20 /O2 /W3 /DUNICODE /D_UNICODE /c ChromiumAltTabInjector.wh.cpp /Fo:ChromiumAltTabInjector.obj
+        cl /EHsc /std:c++20 /O2 /W3 /DUNICODE /D_UNICODE /I include /c ChromiumAltTabInjector.wh.cpp /Fo:ChromiumAltTabInjector.obj
         echo "Source syntax and compatibility verified successfully."
 
