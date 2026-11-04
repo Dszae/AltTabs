@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AltTabs - Interactive Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 30%, #1e2640 0%, #0d111a 70%, #080a10 100%);
+      color: #f0f3f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    /* Ambient glow elements */
+    .glow-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 120, 212, 0.18) 0%, rgba(0, 229, 255, 0.05) 50%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(-20%, -20%) scale(1); }
+      100% { transform: translate(20%, 20%) scale(1.15); }
+    }
+
+    /* Header Bar */
+    header {
+      position: absolute;
+      top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      gap: 8px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #00e5ff;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #b0c4de 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+      max-width: 600px;
+    }
+
+    /* Alt-Tab Switcher Container */
+    .switcher-overlay {
+      position: relative;
+      z-index: 10;
+      width: 92%;
+      max-width: 1150px;
+      background: rgba(20, 26, 40, 0.65);
+      backdrop-filter: blur(40px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      padding: 32px 36px 40px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .switcher-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+
+    .switcher-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .switcher-title span.indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 10px #00e5ff;
+    }
+
+    .switcher-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .toggle-btn.active {
+      background: #0078d4;
+      border-color: #0086f0;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(0, 120, 212, 0.4);
+    }
+
+    /* Tiles Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .tile-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      height: 190px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: all 0.25s ease;
+    }
+
+    .tile-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .tile-card.selected {
+      background: rgba(0, 120, 212, 0.25);
+      border-color: #00e5ff;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.35), inset 0 0 15px rgba(0, 229, 255, 0.1);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .tile-card.selected::before {
+      background: #00e5ff;
+      box-shadow: 0 0 12px #00e5ff;
+    }
+
+    .tile-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tile-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .tile-domain {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tile-badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(0, 229, 255, 0.15);
+      color: #00e5ff;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .tile-preview {
+      flex: 1;
+      margin: 12px 0 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .preview-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-item.active {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    .preview-bullet {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #00e5ff;
+    }
+
+    .tile-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .tile-status {
+      color: #38bdf8;
+      font-weight: 500;
+    }
+
+    /* Interactive Instruction Pill */
+    .instruction-bar {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .key-cap {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom-width: 2px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #f1f5f9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Metric HUD */
+    .hud-bar {
+      position: absolute;
+      bottom: 24px;
+      display: flex;
+      gap: 32px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 24px;
+      border-radius: 30px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hud-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .hud-label {
+      color: #64748b;
+    }
+
+    .hud-val {
+      color: #38bdf8;
+      font-weight: 700;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-orb"></div>
+
+  <header>
+    <div class="badge-pill">⚡ AltTabs Windhawk Mod Demo</div>
+    <h1>Windows Native Alt+Tab Switcher</h1>
+    <p class="subtitle">Experience Chromium tabs intelligently grouped by domain inside the native Windows shell.</p>
+  </header>
+
+  <div class="switcher-overlay" id="switcher">
+    <div class="switcher-header">
+      <div class="switcher-title">
+        <span class="indicator"></span>
+        <span>Windows Task View & Switcher</span>
+      </div>
+      <div class="switcher-controls">
+        <button class="toggle-btn active" id="btnGroup" onclick="toggleGrouping()">
+          <span>🗂️ Stacking: ON</span>
+        </button>
+        <button class="toggle-btn" onclick="nextTab()">
+          <span>Next [Tab ⇥]</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-container" id="grid">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <div class="instruction-bar">
+      <span>Press <span class="key-cap">Tab</span> or <span class="key-cap">→</span> to cycle items</span>
+      <span>•</span>
+      <span>Press <span class="key-cap">Enter</span> to activate tab</span>
+      <span>•</span>
+      <span>Toggle <span class="key-cap">S</span> to toggle domain stacking</span>
+    </div>
+  </div>
+
+  <div class="hud-bar">
+    <div class="hud-stat">
+      <span class="hud-label">UIA LRPC Latency:</span>
+      <span class="hud-val">9.4 ms</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Open Tabs:</span>
+      <span class="hud-val" id="tabCount">14 tabs</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Active Stack:</span>
+      <span class="hud-val" id="activeDomain">github.com</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Memory:</span>
+      <span class="hud-val">6.2 MB</span>
+    </div>
+  </div>
+
+  <script>
+    const sampleTabs = [
+      { domain: 'github.com', icon: '🐙', title: 'AltTabs - Windhawk Mod Source (C++20)', url: 'https://github.com/Dszae/AltTabs' },
+      { domain: 'github.com', icon: '🐙', title: 'PR #42: Batch UIA Cache Optimization', url: 'https://github.com/Dszae/AltTabs/pull/42' },
+      { domain: 'github.com', icon: '🐙', title: 'Issues · ramensoftware/windhawk', url: 'https://github.com/ramensoftware/windhawk' },
+      { domain: 'github.com', icon: '🐙', title: 'Release v1.0.0 · Pre-compiled Binaries', url: 'https://github.com/Dszae/AltTabs/releases' },
+      
+      { domain: 'stackoverflow.com', icon: '🥞', title: 'How to bypass AllowSetForegroundWindow in Win32', url: 'https://stackoverflow.com/q/12345' },
+      { domain: 'stackoverflow.com', icon: '🥞', title: 'IUIAutomationCacheRequest with TreeScope_Descendants', url: 'https://stackoverflow.com/q/67890' },
+      { domain: 'stackoverflow.com', icon: '🥞', title: 'C++20 std::jthread and atomic synchronization', url: 'https://stackoverflow.com/q/11223' },
+
+      { domain: 'google.com', icon: '🔍', title: 'Google Search: twinui.pcshell.dll symbol hooks', url: 'https://google.com/search' },
+      { domain: 'google.com', icon: '🔍', title: 'Google Docs: AltTabs Launch Strategy 10k Stars', url: 'https://docs.google.com' },
+
+      { domain: 'youtube.com', icon: '▶️', title: 'Windows 11 Customization Mastery with Windhawk', url: 'https://youtube.com/watch?v=1' },
+      { domain: 'youtube.com', icon: '▶️', title: 'Synthwave Coding Beats 24/7 Live Stream', url: 'https://youtube.com/watch?v=2' },
+
+      { domain: 'learn.microsoft.com', icon: '📘', title: 'UI Automation Support for Controls - Win32 apps', url: 'https://learn.microsoft.com' },
+      { domain: 'chatgpt.com', icon: '🤖', title: 'Refactoring Win32 CComPtr and Thread Attachments', url: 'https://chatgpt.com' },
+      { domain: 'windhawk.net', icon: '🦅', title: 'Windhawk - The Windows customization engine', url: 'https://windhawk.net' }
+    ];
+
+    let isGrouped = true;
+    let selectedIndex = 0;
+
+    function render() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+
+      if (isGrouped) {
+        // Group by domain
+        const groups = {};
+        sampleTabs.forEach(tab => {
+          if (!groups[tab.domain]) groups[tab.domain] = [];
+          groups[tab.domain].push(tab);
+        });
+
+        const domainKeys = Object.keys(groups);
+        if (selectedIndex >= domainKeys.length) selectedIndex = 0;
+
+        domainKeys.forEach((domain, idx) => {
+          const tabs = groups[domain];
+          const isSelected = (idx === selectedIndex);
+
+          const card = document.createElement('div');
+          card.className = `tile-card ${isSelected ? 'selected' : ''}`;
+          card.onclick = () => { selectedIndex = idx; render(); };
+
+          const previewItems = tabs.slice(0, 3).map((t, i) => `
+            <div class="preview-item ${i === 0 ? 'active' : ''}">
+              <span class="preview-bullet"></span>
+              <span>${t.title}</span>
+            </div>
+          `).join('');
+
+          card.innerHTML = `
+            <div class="tile-top">
+              <div class="tile-icon">${tabs[0].icon}</div>
+              <div class="tile-domain">${domain}</div>
+              <div class="tile-badge">${tabs.length} tabs</div>
+            </div>
+            <div class="tile-preview">
+              ${previewItems}
+            </div>
+            <div class="tile-bottom">
+              <span>Chromium View</span>
+              <span class="tile-status">${isSelected ? 'Active Selection' : 'Click to Focus'}</span>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        document.getElementById('activeDomain').innerText = domainKeys[selectedIndex];
+      } else {
+        // Flat tabs
+        if (selectedIndex >= sampleTabs.length) selectedIndex = 0;
+
+        sampleTabs.forEach((tab, idx) => {
+          const isSelected = (idx === selectedIndex);
+
+          const card = document.createElement('div');
+          card.className = `tile-card ${isSelected ? 'selected' : ''}`;
+          card.onclick = () => { selectedIndex = idx; render(); };
+
+          card.innerHTML = `
+            <div class="tile-top">
+              <div class="tile-icon">${tab.icon}</div>
+              <div class="tile-domain">${tab.domain}</div>
+            </div>
+            <div class="tile-preview">
+              <div class="preview-item active">
+                <span class="preview-bullet"></span>
+                <span>${tab.title}</span>
+              </div>
+              <div class="preview-item" style="color: #64748b; font-size: 11px;">
+                ${tab.url}
+              </div>
+            </div>
+            <div class="tile-bottom">
+              <span>Individual Tab</span>
+              <span class="tile-status">${isSelected ? 'Active Selection' : 'Click to Focus'}</span>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        document.getElementById('activeDomain').innerText = sampleTabs[selectedIndex].title.substring(0, 18) + '...';
+      }
+    }
+
+    function toggleGrouping() {
+      isGrouped = !isGrouped;
+      const btn = document.getElementById('btnGroup');
+      btn.className = `toggle-btn ${isGrouped ? 'active' : ''}`;
+      btn.innerHTML = `<span>🗂️ Stacking: ${isGrouped ? 'ON' : 'OFF (Cluttered)'}</span>`;
+      selectedIndex = 0;
+      render();
+    }
+
+    function nextTab() {
+      const max = isGrouped ? Object.keys(sampleTabs.reduce((acc, t) => { acc[t.domain] = 1; return acc; }, {})).length : sampleTabs.length;
+      selectedIndex = (selectedIndex + 1) % max;
+      render();
+    }
+
+    function prevTab() {
+      const max = isGrouped ? Object.keys(sampleTabs.reduce((acc, t) => { acc[t.domain] = 1; return acc; }, {})).length : sampleTabs.length;
+      selectedIndex = (selectedIndex - 1 + max) % max;
+      render();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextTab();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevTab();
+      } else if (e.key.toLowerCase() === 's') {
+        toggleGrouping();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
+

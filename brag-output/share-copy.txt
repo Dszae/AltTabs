@@ -1,0 +1,10 @@
+Edge had tabs in Alt-Tab for years. Chrome and Brave were left in the dark.
+
+I built AltTabs: an open-source Windhawk mod that injects your Chromium tabs into Windows Alt-Tab, smartly grouped by root domain so 60 tabs don't turn into an unreadable wall.
+
+⚡ Zero-lag UIA batch caching (< 12ms)
+🔒 100% offline & local memory
+🪶 < 10MB RAM, 0% CPU
+
+Grab it free on GitHub: https://github.com/Dszae/AltTabs
+

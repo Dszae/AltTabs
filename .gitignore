@@ -1,0 +1,18 @@
+# Build and Intermediate Files
+*.obj
+*.pdb
+*.exe
+*.dll
+*.lib
+*.exp
+*.log
+
+# Python / Tools
+__pycache__/
+*.py[cod]
+render_video.py
+
+# Temp Work Files
+brag-output/work/
+.vscode/
+.vs/

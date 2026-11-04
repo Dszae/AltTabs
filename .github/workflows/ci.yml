@@ -1,0 +1,25 @@
+name: Build and Verify Mod
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC C++ Environment
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Compile Standalone Windhawk Mod Source
+      shell: pwsh
+      run: |
+        cl /EHsc /std:c++20 /O2 /W3 /DUNICODE /D_UNICODE /c ChromiumAltTabInjector.wh.cpp /Fo:ChromiumAltTabInjector.obj
+        echo "Source syntax and compatibility verified successfully."
+
