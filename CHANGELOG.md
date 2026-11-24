@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2026-11-24
 
 ### Changed
+- **Mod ID**: The Windhawk mod ID is now `alttabs`, since the mod no longer adds tabs to Alt+Tab. If you installed an earlier version as a local mod, remove it after installing this one, so that both don't run.
 - **Native Tab Strip Only**: Tabs are read from the browser's tab strip with a search that skips web page content. Previously, tab widgets inside web pages could show up as extra entries (e.g. 14 entries for a 5-tab window).
 - **Browser-Only Hotkeys**: `Alt + Q` and ``Alt + ` `` are only taken over while an enabled browser is focused. `AltGr` (Ctrl+Alt) combinations are left alone, so e.g. `AltGr + Q` still types `@` on German layouts.
 - **Site Labels**: The label next to a tab is the site name from the end of its title (e.g. `YouTube`), instead of a guessed `.com` domain.
@@ -17,10 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Scrolling with the selection, `Page Up` / `Page Down`, the mouse wheel, and a scroll bar.
 - `Shift + Alt + Q` cycles backwards, `Ctrl + Backspace` clears the filter.
 - Multi-word filtering, a match count, and a marker for the current tab.
+- The switcher opens with the tab after the current one selected, so `Alt + Q`, `Enter` switches to another tab.
 - DPI scaling, and keeping the switcher inside the browser's monitor.
+- Touchpad scrolling.
 
 ### Fixed
 - The keyboard hook runs on its own thread, so UI Automation calls can no longer delay keyboard input system-wide.
+- The switcher takes the focus reliably. If Windows still refuses, it closes instead of staying on top without focus.
+- Windows without a tab strip, such as app windows, open right away instead of after retries, and a browser that stops responding is given up on after 2 seconds.
 - `Alt + F2` no longer opens the switcher, and `Alt + \` isn't taken over anymore.
 - Clicking a row in the lower part of the list selected the wrong tab.
 - Clicking another app while the switcher was open tried to pull the focus back to the browser.

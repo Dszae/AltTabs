@@ -121,7 +121,7 @@ All controls are active whenever the AltTabs HUD is open:
 
 | Shortcut | Action | Description |
 | :--- | :--- | :--- |
-| **`Alt + Q`** | **Summon / Cycle** | Summons the HUD over your browser. Tap repeatedly to cycle tabs, add `Shift` to cycle backwards. |
+| **`Alt + Q`** | **Summon / Cycle** | Summons the HUD over your browser, with the tab after the current one selected. Tap repeatedly to cycle tabs, add `Shift` to cycle backwards. |
 | **`Alt + ` ` / `Alt + ~`** | **Alternative Summon** | Same as `Alt + Q`, using the key above Tab on US layouts. |
 | **`Tab`** or **`↓ Down Arrow`** | **Next Tab** | Moves selection down by one row. |
 | **`Shift + Tab`** or **`↑ Up Arrow`** | **Previous Tab** | Moves selection up by one row. |
@@ -213,7 +213,7 @@ AltTabs is built for zero perceptible latency:
    ```text
    Found 24 tabs
    ```
-3. Open **Windows Task Manager** $\rightarrow$ **Details**, locate the `windhawk.exe` process with command-line `-tool-mod "chromium-alttab-tabs"`, and observe memory and CPU remain at 0% when idle.
+3. Open **Windows Task Manager** $\rightarrow$ **Details**, locate the `windhawk.exe` process with command-line `-tool-mod "alttabs"`, and observe memory and CPU remain at 0% when idle.
 
 ---
 
