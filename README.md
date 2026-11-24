@@ -277,3 +277,7 @@ Yes! Chromium's UI Automation tree represents tabs as <code>UIA_TabItemControlTy
 
 - **License**: Released under the open-source [MIT License](LICENSE).
 - **Acknowledgements**: Built on the open-source [Windhawk](https://windhawk.net/) framework developed by [Ramen Software](https://github.com/ramensoftware).
+
+## Author
+
+Built by **Dipesh Sapkota** ([@Dszae](https://github.com/Dszae)), a Computer Engineering student at IOE Thapathali Campus, Kathmandu, Nepal. More projects at [dipeshsapkota7.com.np](https://www.dipeshsapkota7.com.np/).
