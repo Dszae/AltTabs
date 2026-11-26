@@ -9,7 +9,7 @@ Summon instantly with **`Alt + Q`** or **`Alt + ` `**, search in real time, and 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Platform: Windows 10 | 11](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows)](https://microsoft.com/windows)
-[![Windhawk Mod](https://img.shields.io/badge/Windhawk-Local%20Mod-ff5f56?style=flat-square)](https://windhawk.net/)
+[![Windhawk Mod](https://img.shields.io/badge/Windhawk-Install%20AltTabs-ff5f56?style=flat-square)](https://windhawk.net/mods/alttabs)
 [![Build and Verify Mod](https://img.shields.io/github/actions/workflow/status/Dszae/AltTabs/ci.yml?branch=main&label=Build&style=flat-square)](https://github.com/Dszae/AltTabs/actions)
 [![Language: C++](https://img.shields.io/badge/Language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B)](https://isocpp.org/)
 
@@ -78,7 +78,7 @@ Power users and developers frequently keep dozens of tabs open across research, 
 
 ## 📥 Installation
 
-AltTabs is installed as a **custom local mod** in [Windhawk](https://windhawk.net/), the trusted Windows customization engine. This provides direct installation without waiting for repository catalog publishing.
+AltTabs is published in the official [Windhawk](https://windhawk.net/) mod catalog: **[windhawk.net/mods/alttabs](https://windhawk.net/mods/alttabs)**.
 
 ### Prerequisites
 - Windows 10 (version 1809+) or Windows 11 (all versions).
@@ -86,22 +86,23 @@ AltTabs is installed as a **custom local mod** in [Windhawk](https://windhawk.ne
 
 ---
 
-### Step-by-Step Setup (Takes 1 Minute)
+### Install from the Windhawk Catalog (Recommended)
 
-#### Step 1: Create a Local Mod in Windhawk
-1. Open the **Windhawk** application from your Start Menu or system tray.
-2. In the top-right corner, click the **three dots menu (`···`)** $\rightarrow$ select **Advanced Options**.
-3. Click **Create Local Mod** (or the **`+` New Mod** button).
+1. Open **Windhawk** and go to **Explore**.
+2. Search for **AltTabs** and open **AltTabs - Browser Tab Switcher HUD**.
+3. Click **Install**, then **Accept Risk and Install**.
 
-#### Step 2: Paste the Mod Source Code
-1. Open the [`ChromiumAltTabInjector.wh.cpp`](ChromiumAltTabInjector.wh.cpp) file from this repository.
-2. Copy the entire file content (`Ctrl + A`, then `Ctrl + C`).
-3. In Windhawk's built-in code editor, replace all existing code with your copied code (`Ctrl + A`, then `Ctrl + V`).
+Windhawk keeps the mod updated when new versions are published. If the mod doesn't show up in search, exit Windhawk from its tray icon and open it again so it downloads the latest catalog.
 
-#### Step 3: Save & Compile
-1. Press **`Ctrl + S`** (or click **Save** $\rightarrow$ **Compile Mod**).
-2. Windhawk will compile the mod in ~3 seconds using its internal toolchain.
-3. Once compiled, the status will display **Loaded**.
+---
+
+### Install as a Local Mod (Development Builds)
+
+Use this to try changes from this repository before they reach the catalog. If you also have the catalog version installed, disable it first so that both don't run.
+
+1. In Windhawk, click the **three dots menu (`···`)** $\rightarrow$ **Advanced Options** $\rightarrow$ **Create Local Mod** (or the **`+` New Mod** button).
+2. Copy the entire content of [`ChromiumAltTabInjector.wh.cpp`](ChromiumAltTabInjector.wh.cpp) and paste it over the code in Windhawk's editor.
+3. Press **`Ctrl + S`** (or click **Compile Mod**). Once compiled, the status shows **Loaded**.
 
 You're done! Switch to your browser and press **`Alt + Q`**.
 
