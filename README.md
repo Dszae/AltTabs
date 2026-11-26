@@ -16,8 +16,8 @@ Summon instantly with **`Alt + Q`** or **`Alt + ` `**, search in real time, and 
 <br/>
 
 <p align="center">
-  <img src="assets/hud.png" alt="The AltTabs switcher listing browser tabs, with GitHub tabs grouped together" width="720"/><br/>
-  <sub>🎬 <b><a href="assets/demo.mp4">Watch 1080p Video Demonstration (assets/demo.mp4)</a></b> • 🎮 <b><a href="demo.html">Interactive Browser Demo (demo.html)</a></b></sub>
+  <a href="assets/launch.mp4"><img src="assets/launch.jpg" alt="AltTabs launch video: press Alt+Q in a browser with 40 tabs, type a few letters, press Enter" width="720"/></a><br/>
+  <sub>▶️ <b><a href="assets/launch.mp4">Watch the 22-second video</a></b> • 📥 <b><a href="https://windhawk.net/mods/alttabs">Install from Windhawk</a></b></sub>
 </p>
 
 <br/>
@@ -48,19 +48,9 @@ Power users and developers frequently keep dozens of tabs open across research, 
 3. You can instantly filter the list by typing keywords or navigate with **`Tab`** / **`Arrow Keys`**.
 4. Pressing **`Enter`** brings the target tab into view immediately.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        ALTTABS QUICK SWITCHER                          │
-├────────────────────────────────────────────────────────────────────────┤
-│  🔍 Search: git                                                        │
-├────────────────────────────────────────────────────────────────────────┤
-│  > Issues · Dszae/AltTabs · GitHub                             GitHub  │
-│    Actions · Dszae/AltTabs · GitHub                            GitHub  │
-│    Pull requests · ramensoftware/windhawk-mods · GitHub        GitHub  │
-├────────────────────────────────────────────────────────────────────────┤
-│  [Tab / ↑↓] Navigate    [Enter] Switch Tab    [Esc] Close              │
-└────────────────────────────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="assets/hud.png" alt="The AltTabs switcher listing browser tabs, with GitHub tabs grouped together" width="640"/>
+</p>
 
 ---
 
