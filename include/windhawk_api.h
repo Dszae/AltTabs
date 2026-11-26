@@ -6,7 +6,7 @@ typedef BOOL WINBOOL;
 #endif
 
 #ifndef WH_MOD_ID
-#define WH_MOD_ID L"chromium-alttab-tabs"
+#define WH_MOD_ID L"alttabs"
 #endif
 
 inline int Wh_GetIntSetting(const wchar_t*) { return 0; }

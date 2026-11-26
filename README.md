@@ -16,7 +16,7 @@ Summon instantly with **`Alt + Q`** or **`Alt + ` `**, search in real time, and 
 <br/>
 
 <p align="center">
-  <img src="assets/preview.jpg" alt="AltTabs Interface Preview" width="880" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);"/><br/>
+  <img src="assets/hud.png" alt="The AltTabs switcher listing browser tabs, with GitHub tabs grouped together" width="720"/><br/>
   <sub>🎬 <b><a href="assets/demo.mp4">Watch 1080p Video Demonstration (assets/demo.mp4)</a></b> • 🎮 <b><a href="demo.html">Interactive Browser Demo (demo.html)</a></b></sub>
 </p>
 
@@ -29,7 +29,7 @@ Summon instantly with **`Alt + Q`** or **`Alt + ` `**, search in real time, and 
 ---
 
 > [!NOTE]
-> **AltTabs is an in-browser tab switcher HUD**, not a replacement for the Windows application Alt+Tab window switcher. It is designed specifically to solve tab overload inside Chromium browsers (**Brave**, **Google Chrome**, **Microsoft Edge**, **Opera**, and **Vivaldi**) without injecting into Explorer or altering web pages.
+> **AltTabs is an in-browser tab switcher HUD**, not a replacement for the Windows application Alt+Tab window switcher. It is designed specifically to solve tab overload inside Chromium browsers (**Brave**, **Google Chrome**, **Microsoft Edge**, and **Opera**) without injecting into Explorer or altering web pages.
 
 ---
 
@@ -44,7 +44,7 @@ Power users and developers frequently keep dozens of tabs open across research, 
 ### The Solution: AltTabs
 **AltTabs** runs as an isolated, native Win32 tool mod via [Windhawk](https://windhawk.net/). When you press **`Alt + Q`** or **`Alt + ` `**:
 1. A sleek, centered dark HUD immediately floats over your active browser window.
-2. It displays all open tabs with their titles and root domain tags (`github.com`, `youtube.com`).
+2. It displays all open tabs of that window with their titles and the site name from the end of each title (`GitHub`, `YouTube`).
 3. You can instantly filter the list by typing keywords or navigate with **`Tab`** / **`Arrow Keys`**.
 4. Pressing **`Enter`** brings the target tab into view immediately.
 
@@ -54,9 +54,9 @@ Power users and developers frequently keep dozens of tabs open across research, 
 ├────────────────────────────────────────────────────────────────────────┤
 │  🔍 Search: git                                                        │
 ├────────────────────────────────────────────────────────────────────────┤
-│  > Dszae/AltTabs: Browser Tab Switcher HUD                 github.com  │
-│    Issue #12: Support vertical tab strips                  github.com  │
-│    Pull Request #6964: Add AltTabs Mod                     github.com  │
+│  > Issues · Dszae/AltTabs · GitHub                             GitHub  │
+│    Actions · Dszae/AltTabs · GitHub                            GitHub  │
+│    Pull requests · ramensoftware/windhawk-mods · GitHub        GitHub  │
 ├────────────────────────────────────────────────────────────────────────┤
 │  [Tab / ↑↓] Navigate    [Enter] Switch Tab    [Esc] Close              │
 └────────────────────────────────────────────────────────────────────────┘
@@ -66,10 +66,10 @@ Power users and developers frequently keep dozens of tabs open across research, 
 
 ## ✨ Features
 
-- **⚡ Instant Keyboard Activation**: Summon the switcher with **`Alt + Q`** (universal across all physical keyboard layouts) or **`Alt + ` `** (key directly above Tab).
-- **🔍 Real-Time Fuzzy Filter**: Simply start typing any keyword to narrow down dozens of open tabs in milliseconds.
-- **🏷️ Root Domain Tagging**: Automatically detects and groups titles by website domain (`github.com`, `stackoverflow.com`, `reddit.com`) for rapid visual scanning.
-- **🎨 Windows 11 Fluent Aesthetics**: Uses DWM dark mode, rounded corners (`DWMWCP_ROUND`), ClearType Segoe UI typography, and double-buffered GDI rendering.
+- **⚡ Instant Keyboard Activation**: Summon the switcher with **`Alt + Q`** or **`Alt + ` `** (the key above Tab on US layouts). The hotkeys are only taken over while a supported browser is focused, so other apps keep them.
+- **🔍 Real-Time Filter**: Start typing to narrow down dozens of open tabs. Several words match tabs that contain all of them, in any order.
+- **🏷️ Site Labels & Grouping**: Shows the site name from the end of each tab title (`GitHub`, `Stack Overflow`, `YouTube`) and can list the tabs of each site together. Browsers don't expose tab addresses to other apps, so the label comes from the title.
+- **🎨 Windows 11 Fluent Aesthetics**: Uses DWM dark mode, rounded corners (`DWMWCP_ROUND`), ClearType Segoe UI typography, double-buffered GDI rendering, and scales with the display's DPI.
 - **🔒 100% Offline & Private**: Zero telemetry, zero analytics, zero external network traffic. Everything executes strictly in local memory.
 - **🪶 Zero Background Impact**: Uses a non-polling event model. Consumes **0% CPU** and **< 8 MB RAM** when idle.
 - **🛡️ Clean Separation**: Runs inside an isolated Windhawk tool process. Does not inject hooks into `explorer.exe` or modify webpage DOM content.
@@ -121,14 +121,15 @@ All controls are active whenever the AltTabs HUD is open:
 
 | Shortcut | Action | Description |
 | :--- | :--- | :--- |
-| **`Alt + Q`** | **Summon / Cycle** | Summons the HUD over your browser. Tap repeatedly to cycle tabs. |
-| **`Alt + ` ` / `Alt + ~`** | **Alternative Summon** | Secondary trigger using the backtick key directly above Tab. |
+| **`Alt + Q`** | **Summon / Cycle** | Summons the HUD over your browser, with the tab after the current one selected. Tap repeatedly to cycle tabs, add `Shift` to cycle backwards. |
+| **`Alt + ` ` / `Alt + ~`** | **Alternative Summon** | Same as `Alt + Q`, using the key above Tab on US layouts. |
 | **`Tab`** or **`↓ Down Arrow`** | **Next Tab** | Moves selection down by one row. |
 | **`Shift + Tab`** or **`↑ Up Arrow`** | **Previous Tab** | Moves selection up by one row. |
+| **`Page Down`** / **`Page Up`** | **Next / Previous Page** | Moves selection by one page of rows. |
 | **Any Character Key (`a-z`, `0-9`)** | **Filter / Search** | Types directly into the search bar, filtering visible tabs instantly. |
-| **`Backspace`** | **Delete Character** | Removes the last typed filter character. |
+| **`Backspace`** / **`Ctrl + Backspace`** | **Delete / Clear** | Removes the last typed character, or clears the filter. |
 | **`Enter`** | **Activate Tab** | Switches to the selected tab and dismisses the HUD. |
-| **Left Click** | **Mouse Selection** | Direct click on any row activates that tab immediately. |
+| **Left Click** / **Mouse Wheel** | **Mouse Selection** | Click a row to switch to that tab, scroll the wheel to scroll the list. |
 | **`Esc`** | **Dismiss** | Closes the HUD without changing the active tab. |
 
 ---
@@ -140,10 +141,10 @@ AltTabs targets the standard Chromium Views accessibility tree (`Chrome_WidgetWi
 | Browser | Status | Verification Details |
 | :--- | :---: | :--- |
 | **Brave Browser** | ✅ **Verified** | Fully tested and verified on Windows 11. Tab strip enumeration and selection verified. |
-| **Google Chrome** | ✅ **Supported** | Standard Chromium Views architecture (`Chrome_WidgetWin_1`). |
-| **Microsoft Edge** | ✅ **Supported** | Standard Chromium Views architecture (`Chrome_WidgetWin_1`). |
-| **Opera** | 🟡 **Expected** | Uses Chromium Views; community testing in progress. |
-| **Vivaldi** | 🟡 **Expected** | Uses Chromium Views; community testing in progress. |
+| **Google Chrome** | ✅ **Verified** | Tab strip enumeration verified (`TabContainer`). |
+| **Microsoft Edge** | ✅ **Verified** | Tab strip enumeration verified (`EdgeTabStripRegionView`). |
+| **Opera** | 🟡 **Untested** | Uses Chromium Views; community testing welcome. |
+| **Vivaldi** | ❌ **Unsupported** | Vivaldi's tab bar is part of a web page, not a native tab strip. |
 | **Mozilla Firefox** | ❌ **Unsupported** | Uses Gecko XUL rendering engine (`MozillaWindowClass`), not Chromium Views. |
 
 ---
@@ -161,12 +162,12 @@ sequenceDiagram
     participant UIA as Windows UI Automation (CUIAutomation)
     participant Browser as Browser Window (Chrome_WidgetWin_1)
 
-    User->>Hook: Presses Alt+Q or Alt+`
-    Hook->>HUD: PostMessage(WM_APP + 10) [Non-blocking <0.1ms]
-    HUD->>Browser: SendMessageTimeout(WM_GETOBJECT) [Ensures accessibility tree is awake]
-    HUD->>UIA: ElementFromHandle + FindAll(TreeScope_Descendants, UIA_TabItemControlTypeId)
-    Browser-->>UIA: Returns tab elements (names, bounds)
-    HUD->>HUD: Parse root domains + apply filter
+    User->>Hook: Presses Alt+Q or Alt+` in a browser
+    Hook->>HUD: PostMessage(registered hotkey message) [Non-blocking]
+    HUD->>UIA: ElementFromHandle + breadth-first search for the tab strip, skipping web content
+    UIA->>Browser: FindAllBuildCache(TabItem) inside the tab strip
+    Browser-->>UIA: Returns tab elements (names, selection state)
+    HUD->>HUD: Read site names + group + apply filter
     HUD-->>User: Displays Centered Double-Buffered HUD
     User->>HUD: Types filter query / presses Tab / Enter
     HUD->>Browser: IUIAutomationSelectionItemPattern::Select()
@@ -178,16 +179,14 @@ sequenceDiagram
    Runs as a standalone tool process rather than injecting DLL code into `explorer.exe` or third-party web browsers. This eliminates Explorer stability risks.
 2. **DLL Module Binding for Hooks**:
    The `WH_KEYBOARD_LL` hook is installed using `HINST_THISCOMPONENT` (`&__ImageBase`), ensuring the Windows hook manager accepts the hook procedure without rejecting `windhawk.exe` as an invalid module.
-3. **Dedicated COM Worker Thread**:
-   Runs its own Win32 message loop with `CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED)`. Heavy UIA calls never block the low-level keyboard hook callback.
-4. **Resilient Window Activation**:
-   Tab activation uses a 4-tier fallback:
-   - `IUIAutomationSelectionItemPattern::Select()`
-   - `IUIAutomationLegacyIAccessiblePattern::DoDefaultAction()`
-   - `IUIAutomationInvokePattern::Invoke()`
-   - Client coordinate mouse click fallback (`WM_LBUTTONDOWN`/`WM_LBUTTONUP`).
-5. **Guaranteed Display Fallback**:
-   If Chromium accessibility takes more than 50ms to populate on first launch, AltTabs captures the active browser window title as a fallback item so the HUD is guaranteed to open visibly on every keystroke.
+3. **Separate Hook and UI Automation Threads**:
+   The `WH_KEYBOARD_LL` hook runs on its own thread that does nothing else, so typing anywhere in Windows is never delayed by UI Automation calls. The HUD and all UIA work live on a second thread with `CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED)`, and UIA calls time out after 2 seconds if a browser hangs.
+4. **Native Tab Strip Only**:
+   Tabs are read from the browser's own tab strip, found with a breadth-first search that never descends into web page content. Tab-like widgets inside web pages (ARIA `role="tab"`) aren't listed, and pages aren't crawled.
+5. **Window Activation**:
+   Tab activation uses `IUIAutomationSelectionItemPattern::Select()`, with `IUIAutomationLegacyIAccessiblePattern::DoDefaultAction()` as a fallback.
+6. **Accessibility Warm-Up**:
+   Chromium builds its accessibility tree on the first request, so right after a browser starts, AltTabs retries the tab strip lookup a couple of times before showing "No tabs found".
 
 ---
 
@@ -206,18 +205,15 @@ We believe system utilities should be completely transparent:
 AltTabs is built for zero perceptible latency:
 
 - **Idle Resource Usage**: 0.0% CPU, < 8 MB private working set.
-- **Activation Latency**: < 15ms from keypress to HUD paint on modern systems.
+- **Activation Latency**: Reading the tab strip takes about 30-100 ms in Brave, Chrome and Edge.
 
 ### How to Verify Locally:
 1. Open **Windhawk** and navigate to the **AltTabs** mod page.
-2. Click the **Log** tab to view real-time timing and enumeration logs generated via `Wh_Log`:
+2. Click the **Log** tab to view the enumeration logs generated via `Wh_Log`:
    ```text
-   AltTabs: Worker thread started, CoInitializeEx hr=0x00000000
-   AltTabs: Low-level keyboard hook installed successfully
-   AltTabs: Found 24 UIA tab items in browser hwnd=0x000508B2
-   AltTabs: HUD displayed for browser hwnd=0x000508B2 (Brave) with 24 tabs
+   Found 24 tabs
    ```
-3. Open **Windows Task Manager** $\rightarrow$ **Details**, locate the `windhawk.exe` process with command-line `-tool-mod "chromium-alttab-tabs"`, and observe memory and CPU remain at 0% when idle.
+3. Open **Windows Task Manager** $\rightarrow$ **Details**, locate the `windhawk.exe` process with command-line `-tool-mod "alttabs"`, and observe memory and CPU remain at 0% when idle.
 
 ---
 
@@ -225,9 +221,10 @@ AltTabs is built for zero perceptible latency:
 
 - [x] **v1.1.0**: Standalone floating HUD with Win32 rounded corners & dark mode.
 - [x] **v1.1.1**: Dual universal hotkeys (`Alt + Q` and `Alt + ` `), COM apartment fixes, and guaranteed fallback display.
-- [ ] **v1.2.0**: User-configurable hotkey selector in Windhawk mod settings UI.
-- [ ] **v1.3.0**: Favicon rendering extracted directly from Chromium cache.
-- [ ] **v1.4.0**: Multi-window tab switching (switch across all open browser windows simultaneously).
+- [x] **v1.2.0**: Native tab strip only, separate hook thread, site grouping, scrolling, DPI scaling, and browser-only hotkeys.
+- [ ] **v1.3.0**: User-configurable hotkey selector in Windhawk mod settings UI.
+- [ ] **v1.4.0**: Favicon rendering.
+- [ ] **v1.5.0**: Multi-window tab switching (switch across all open browser windows simultaneously).
 
 ---
 
@@ -263,12 +260,12 @@ Windows 11's Alt-Tab switcher is controlled by <code>XamlExplorerHost.exe</code>
 
 <details>
 <summary><b>Can I change the keyboard shortcut?</b></summary>
-Yes. In <code>ChromiumAltTabInjector.wh.cpp</code>, locate <code>LowLevelKbdHookProc</code> and adjust the virtual key code (e.g., replace <code>'Q'</code> with your preferred key). A GUI setting for hotkey configuration is planned in an upcoming release.
+Yes. In <code>ChromiumAltTabInjector.wh.cpp</code>, locate <code>IsHotkey</code> and adjust the virtual key code (e.g., replace <code>'Q'</code> with your preferred key). A GUI setting for hotkey configuration is planned in an upcoming release.
 </details>
 
 <details>
 <summary><b>Does this work with vertical tabs in Brave or Edge?</b></summary>
-Yes! Chromium's UI Automation tree represents tabs as <code>UIA_TabItemControlTypeId</code> regardless of whether tab strips are positioned horizontally or vertically.
+It should, since the tabs are found by their UI Automation control type rather than their position, but vertical tabs haven't been tested yet. Reports are welcome.
 </details>
 
 ---
