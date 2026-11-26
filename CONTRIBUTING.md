@@ -11,7 +11,7 @@ Thank you for your interest in making AltTabs better! We welcome contributions o
    ```
 3. **Open Windhawk Mod Editor**:
    - Navigate to **Advanced** -> **Create New Mod**.
-   - Paste the code from `ChromiumAltTabInjector.wh.cpp` or link your local workspace.
+   - Paste the code from `alttabs.wh.cpp` or link your local workspace.
 4. **Compile & Test**:
    - Use Windhawk's built-in compiler (GCC / Clang / MSVC).
    - Test with Google Chrome, Brave, Edge, and Vivaldi under heavy tab counts (50+ tabs) to verify memory and CPU remain at 0% idle.

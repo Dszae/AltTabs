@@ -101,7 +101,7 @@ Windhawk keeps the mod updated when new versions are published. If the mod doesn
 Use this to try changes from this repository before they reach the catalog. If you also have the catalog version installed, disable it first so that both don't run.
 
 1. In Windhawk, click the **three dots menu (`···`)** $\rightarrow$ **Advanced Options** $\rightarrow$ **Create Local Mod** (or the **`+` New Mod** button).
-2. Copy the entire content of [`ChromiumAltTabInjector.wh.cpp`](ChromiumAltTabInjector.wh.cpp) and paste it over the code in Windhawk's editor.
+2. Copy the entire content of [`alttabs.wh.cpp`](alttabs.wh.cpp) and paste it over the code in Windhawk's editor.
 3. Press **`Ctrl + S`** (or click **Compile Mod**). Once compiled, the status shows **Loaded**.
 
 You're done! Switch to your browser and press **`Alt + Q`**.
@@ -197,7 +197,7 @@ We believe system utilities should be completely transparent:
 - **No Network Permissions**: AltTabs makes zero outbound HTTP/HTTPS requests and has no network sockets open.
 - **No Telemetry**: No tracking, usage analytics, or error reporting is transmitted.
 - **No Page DOM Access**: AltTabs operates strictly at the desktop window accessibility level (`UIA_TabItemControlTypeId`). It never reads webpage content, passwords, forms, or cookies.
-- **Open Source Auditable**: The entire codebase is self-contained in a single readable source file: [`ChromiumAltTabInjector.wh.cpp`](ChromiumAltTabInjector.wh.cpp).
+- **Open Source Auditable**: The entire codebase is self-contained in a single readable source file: [`alttabs.wh.cpp`](alttabs.wh.cpp).
 
 ---
 
@@ -239,7 +239,7 @@ Contributions are warmly welcomed! Please read [CONTRIBUTING.md](CONTRIBUTING.md
    git clone https://github.com/<your-username>/AltTabs.git
    ```
 2. Open Windhawk $\rightarrow$ **Advanced Options** $\rightarrow$ **Create Local Mod**.
-3. Edit [`ChromiumAltTabInjector.wh.cpp`](ChromiumAltTabInjector.wh.cpp) in your editor of choice (e.g., VS Code).
+3. Edit [`alttabs.wh.cpp`](alttabs.wh.cpp) in your editor of choice (e.g., VS Code).
 4. Paste and test your changes in Windhawk.
 5. Submit a Pull Request targeting the `main` branch.
 
@@ -261,7 +261,7 @@ Windows 11's Alt-Tab switcher is controlled by <code>XamlExplorerHost.exe</code>
 
 <details>
 <summary><b>Can I change the keyboard shortcut?</b></summary>
-Yes. In <code>ChromiumAltTabInjector.wh.cpp</code>, locate <code>IsHotkey</code> and adjust the virtual key code (e.g., replace <code>'Q'</code> with your preferred key). A GUI setting for hotkey configuration is planned in an upcoming release.
+Yes. In <code>alttabs.wh.cpp</code>, locate <code>IsHotkey</code> and adjust the virtual key code (e.g., replace <code>'Q'</code> with your preferred key). A GUI setting for hotkey configuration is planned in an upcoming release.
 </details>
 
 <details>
